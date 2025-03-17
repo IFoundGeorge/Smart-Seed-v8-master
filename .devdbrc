@@ -1,0 +1,30 @@
+[
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Fujitsu\\Documents\\Cyrus Coding\\smart seed\\database\\farmers.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "e:\\Coding Projects\\html\\Smart-Seed-v8-main\\database\\farmers.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "e:\\Coding Projects\\html\\Smart-Seed-v8-main\\database\\historical_yield.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Fujitsu\\Documents\\Cyrus Coding\\Smart-Seed-v8-master\\database\\farmers.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Fujitsu\\Documents\\Cyrus Coding\\Smart-Seed-v8-master\\js\\farmventory.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Fujitsu\\Documents\\Cyrus Coding\\Smart-Seed-v8-master\\database\\historical_yield.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "c:\\Users\\Fujitsu\\Documents\\Cyrus Coding\\Smart-Seed-v8-master\\database\\farners.db"
+  }
+]
