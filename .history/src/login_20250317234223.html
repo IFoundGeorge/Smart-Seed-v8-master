@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Form with Custom CAPTCHA</title>
-    <link rel="stylesheet" href="../../css/login.css" />
+    <link rel="stylesheet" href="../css/login.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.7.0/sha1.min.js"></script>
   </head>
   <body>
@@ -33,10 +33,10 @@
           <button type="submit" id="login-button" disabled>Login</button>
         </form>
 
-        <!-- Clickable Guest Login -->
-        <p class="guest-text">
-          Or <a href="#" onclick="loginAsGuest()">continue as Guest</a>
-        </p>
+        <!-- Login as Guest Button -->
+        <button onclick="loginAsGuest()" class="guest-button">
+          Login as Guest
+        </button>
       </div>
     </div>
 
@@ -54,7 +54,9 @@
 
     <script>
       function loginAsGuest() {
-        window.location.href = "guest/index.html";
+        alert("Logged in as Guest!");
+        // You can redirect the guest to a specific page:
+        // window.location.href = "guest-dashboard.html";
       }
     </script>
   </body>
