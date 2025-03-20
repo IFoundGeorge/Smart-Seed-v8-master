@@ -11,18 +11,18 @@
 
     <title>Smart Seed</title>
 
-    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Custom fonts for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.css" rel="stylesheet">
     <style>
         /* Change the color of sidebar links */
         .sidebar .nav-item .nav-link {
@@ -41,36 +41,6 @@
             color: white; /* Text color for active links */
         }
     </style>
-    <style>
-        /* Adjust content wrapper margin when the sidebar is toggled */
-        body.sidebar-toggled #content-wrapper {
-            margin-left: 100px; /* Adjust this value to match the collapsed sidebar width + margin */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
-
-        /* Adjust the sidebar width when toggled */
-        body.sidebar-toggled .sidebar {
-            width: 80px; /* Collapsed sidebar width */
-            transition: width 0.3s ease; /* Smooth transition */
-        }
-
-        /* Hide the sidebar text when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link span {
-            display: none; /* Hide the text */
-        }
-
-        /* Center the icons in the sidebar when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link {
-            text-align: center;
-            padding: 0.75rem 0;
-        }
-
-        /* Add margin to the content for better spacing */
-        #content-wrapper {
-            margin-left: 250px; /* Default margin when the sidebar is expanded */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
-    </style>
 </head>
 
 
@@ -81,6 +51,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
@@ -94,24 +65,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
+                    <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Farmers -->
             <li class="nav-item active">
                 <a class="nav-link" href="farmers.html">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Farmers</span>
-                </a>
+                    <span>Farmers</span></a>
             </li>
 
             <!-- Nav Item - Info -->
             <li class="nav-item">
                 <a class="nav-link" href="info.html">
                     <i class="fas fa-fw fa-info-circle"></i>
-                    <span>Info</span>
-                </a>
+                    <span>Info</span></a>
             </li>
 
             <!-- Divider -->
@@ -121,6 +89,7 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
         </ul>
         <!-- End of Sidebar -->
 

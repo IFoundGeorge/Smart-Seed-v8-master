@@ -117,7 +117,7 @@
     <style>
         /* Adjust content wrapper margin when the sidebar is toggled */
         body.sidebar-toggled #content-wrapper {
-            margin-left: 100px; /* Adjust this value to match the collapsed sidebar width + margin */
+            margin-left: 80px; /* Adjust this value to match the collapsed sidebar width */
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
 
@@ -137,12 +137,6 @@
             text-align: center;
             padding: 0.75rem 0;
         }
-
-        /* Add margin to the content for better spacing */
-        #content-wrapper {
-            margin-left: 250px; /* Default margin when the sidebar is expanded */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
     </style>
 </head>
 
@@ -155,7 +149,7 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
+                <img src="../../img/smartseed_logo.jpg" alt="Smart Seed Logo">
                 <div class="sidebar-brand-text mx-3">Smart Seed</div>
             </a>
 
@@ -163,7 +157,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -171,7 +165,7 @@
             </li>
 
             <!-- Nav Item - Farmers -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="farmers.html">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Farmers</span>
@@ -248,7 +242,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                                 <img class="img-profile rounded-circle"
-                                    src="../img/undraw_profile.svg">
+                                    src="../../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -276,9 +270,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="printPage()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
                     </div>
 
                     <script>
@@ -543,25 +534,26 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/chart.js/Chart.min.js"></script>
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
 
-    <script src="../js/fetchCropData.js"></script>
+    <script src="../../js/fetchCropData.js"></script>
+    
 
 </body>
 

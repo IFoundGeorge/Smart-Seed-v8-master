@@ -1,0 +1,541 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom fonts for this template-->
+    <link href="../node_modules/startbootstrap-sb-admin-2/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        /* Chart.js */
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: .99
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 1ms
+        }
+
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1
+        }
+
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0
+        }
+
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0
+        }
+
+        .sidebar {
+            width: 250px;
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        #content-wrapper {
+            margin-left: 250px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer.sticky-footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background-color: #ffffff;
+            text-align: center;
+            flex-shrink: 0;
+        }
+    </style>
+    <style>
+        /* Change the color of sidebar links */
+        .sidebar .nav-item .nav-link {
+            color: white; /* Default text color */
+        }Page Wrapper -->
+    <div id="wrapper">
+        /* Change the hover color for sidebar links */
+        .sidebar .nav-item .nav-link:hover {
+            background-color: #2e8b57; /* Darker green on hover */accordionSidebar" style="background-color: #3cb043;">
+            color: white; /* Text color on hover */
+        }   <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                e the color of active sidebar links */
+                    <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
+                ground-color: #2e8b57; /* Darker green for active links */
+                <div class="sidebar-brand-text mx-3">Smart Seed</div>
+            </a>
+    </style>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+<body id="page-top">
+            <!-- Nav Item - Dashboard -->-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">ter justify-content-center" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>d Logo">
+            <div class="sidebar-brand-text mx-3">Smart Seed</div>
+        </a>="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Divider -->            <!-- Sidebar - Brand -->
+        <hr class="sidebar-divider my-0">lex align-items-center justify-content-center" href="index.html">
+
+        <!-- Nav Item - Dashboard --> alt="Smart Seed Logo">
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">xt mx-3">Smart Seed</div>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>vider my-0">
+
+        <!-- Nav Item - Farmers -->
+        <li class="nav-item">
+            <a class="nav-link" href="farmers.html">a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-user"></i>                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Farmers</span>shboard</span></a>
+            </a>
+        </li>
+
+        <!-- Nav Item - Info -->
+        <li class="nav-item">
+            <a class="nav-link" href="info.html"> class="nav-link" href="farmers.html">
+                <i class="fas fa-fw fa-info-circle"></i>                    <i class="fas fa-fw fa-user"></i>
+                <span>Info</span>        <span>Farmers</span></a>
+            </a>            </li>
+        </li>
+    </ul>o -->
+            <li class="nav-item">
+    <!-- Button Example -->nk" href="info.html">
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="printPage()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">
+        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report                    <span>Info</span></a>
+    </a>
+
+    <!-- Content Wrapper -->            <!-- Divider -->
+    <div id="content-wrapper" class="d-flex flex-column">divider d-none d-md-block">
+
+        <!-- Main Content -->            <!-- Sidebar Toggler (Sidebar) -->
+        <div id="content">ne">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">        </ul>
+                    <i class="fa fa-bars"></i>
+                </button>
+        <!-- Content Wrapper -->
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">light bg-white topbar mb-4 static-top shadow">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->d-circle mr-3">
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." aria-label="Search"
+                                        aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button"> Dropdown (Visible Only XS) -->
+                                            <i class="fas fa-search fa-sm"></i>m dropdown no-arrow d-sm-none">
+                                        </button>av-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                    </div>ta-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </div>   <i class="fas fa-search fa-fw"></i>
+                            </form>                            </a>
+                        </div>    <!-- Dropdown - Messages -->
+                    </li>                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+own">
+                    <!-- Nav Item - User Information -->o w-100 navbar-search">
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"mall"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>on2">
+                            <img class="img-profile rounded-circle"nd">
+                                src="../img/undraw_profile.svg">            <button class="btn btn-primary" type="button">
+                        </a>-search fa-sm"></i>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>er Information -->
+                                Logoutav-item dropdown no-arrow">
+                            </a>ss="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        </div>   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </li>                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+       <img class="img-profile rounded-circle"
+                </ul>                                    src="../img/undraw_profile.svg">
+      </a>
+            </nav>own - User Information -->
+            <!-- End of Topbar -->                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+edby="userDropdown">
+            <!-- Begin Page Content -->pdown-item" href="#">
+            <div class="container-fluid">                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+le
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="printPage()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">0"></i>
+                        <i class="fas fa-download fa-sm text-white-50"></i> Generate Report        Logout
+                    </a>      </a>
+                </div>                            </div>
+>
+                <script>
+                    function praintPage() {
+                        window.print();
+                    }
+                </script>                <!-- End of Topbar -->
+
+                <!-- Content Row -->nt -->
+                <div class="row">                <div class="container-fluid">
+
+                    <!-- Farmers Card -->
+                    <div class="col-xl-3 col-md-6 mb-4"> mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">0">Dashboard</h1>
+                            <div class="card-body">primary shadow-sm" onclick="printPage()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">
+                                <div class="row no-gutters align-items-center">xt-white-50"></i> Generate Report
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total Number of Farmers 
+                                        </div>
+                                        <div id="totalFarmers" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>{
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-user fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>->
+                            </div>w">
+                        </div>
+                    </div>                        <!-- Farmers Card -->
+ss="col-xl-3 col-md-6 mb-4">
+                    <script>">
+                    document.addEventListener("DOMContentLoaded", function() {
+                        fetch('http://localhost:3000/api/farmers') // Fetch all farmersgn-items-center">
+                            .then(response => response.json())ass="col mr-2">
+                            .then(data => {nt-weight-bold text-primary text-uppercase mb-1">
+                                // Count the number of farmersrs 
+                                const totalFarmers = data.length;
+                                document.getElementById("totalFarmers").textContent = totalFarmers;          <div id="totalFarmers" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>
+                            })
+                            .catch(error => {
+                                console.error('Error fetching farmers:', error);
+                                document.getElementById("totalFarmers").textContent = "Error";     </div>
+                            });         </div>
+                    });/div>
+                    </script>                            </div>
+                        </div>
+
+                    <!-- Total Farm Size -->
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">0/api/farmers') // Fetch all farmers
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Total Farm Size (Hectares)ementById("totalFarmers").textContent = totalFarmers;
+                                        </div>
+                                        <div id="totalFarmSize" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>> {
+                                    </div>ing farmers:', error);
+                                    <div class="col-auto">r";
+                                        <i class="fas fa-seedling fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- Total Farm Size -->
+                    ss="col-xl-3 col-md-6 mb-4">
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            fetch('http://localhost:3000/api/farmers') // Fetch farmers datatems-center">
+                                .then(response => response.json())"col mr-2">
+                                .then(data => {ccess text-uppercase mb-1">
+                                    console.log("Fetched Data:", data); // Debugging                    Total Farm Size (Hectares)
+                        
+                                    if (!Array.isArray(data) || data.length === 0) {ray-800">Loading...</div>
+                                        console.error("API returned an empty array or invalid data.");
+                                        document.getElementById("totalFarmSize").textContent = "No data";"col-auto">
+                                        return;   <i class="fas fa-seedling fa-2x text-gray-300"></i>
+                                    }            </div>
+                        
+                                    let totalFarmSize = 0;    </div>
+                        
+                                    data.forEach(farmer => {
+                                        let size = parseFloat(farmer.Farm_Size); // Match exact key name
+                                        
+                                        if (isNaN(size)) {
+                                            console.warn(`Skipping invalid farm size for farmer:`, farmer);Fetch farmers data
+                                            return; // Skip invalid valuesponse => response.json())
+                                        }        .then(data => {
+                        ", data); // Debugging
+                                        totalFarmSize += size;
+                                    });            if (!Array.isArray(data) || data.length === 0) {
+                        data.");
+                                    console.log("Total Farm Size Calculated:", totalFarmSize);                document.getElementById("totalFarmSize").textContent = "No data";
+                        
+                                    document.getElementById("totalFarmSize").textContent = totalFarmSize.toFixed(2) + " ha";  }
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching farm sizes:', error);
+                                    document.getElementById("totalFarmSize").textContent = "Error"; data.forEach(farmer => {
+                                });             let size = parseFloat(farmer.Farm_Size); // Match exact key name
+                        });       
+                        </script>(isNaN(size)) {
+                                                               console.warn(`Skipping invalid farm size for farmer:`, farmer);
+                        ; // Skip invalid values
+                    <!-- Number of Mother Seed -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">rmSize += size;
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Number of Mother Seednt.getElementById("totalFarmSize").textContent = totalFarmSize.toFixed(2) + " ha";
+                                    </div>
+                                    <div id="totalMotherSeed" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</div>(error => {
+                                </div>or fetching farm sizes:', error);
+                                <div class="col-auto">t = "Error";
+                                    <i class="fas fa-seedling fa-2x text-gray-300"></i>
+                                </div>
+                            </div>pt>
+                        </div>                 
+                    </div>  
+                </div>                        <!-- Number of Mother Seed -->
+ss="col-xl-3 col-md-6 mb-4">
+                <script>">
+                document.addEventListener("DOMContentLoaded", function() {
+                    fetch('http://localhost:3000/api/farmers') // Fetch farmers datagn-items-center">
+                        .then(response => response.json())ass="col mr-2">
+                        .then(data => {g text-uppercase mb-1">
+                            console.log("Fetched Farmers Data:", data); // Debugging                                            Number of Mother Seed
+
+                            if (!Array.isArray(data) || data.length === 0) {text-gray-800">Loading...</div>
+                                console.error("API returned an empty array or invalid data.");
+                                document.getElementById("totalMotherSeed").textContent = "No data";ass="col-auto">
+                                return;       <i class="fas fa-seedling fa-2x text-gray-300"></i>
+                            }                                    </div>
+
+                            // Calculate total mother seed count (Farm_Size * Average_Yield)
+                            const totalMotherSeed = data.reduce((sum, farmer) => {
+                                let farmSize = parseFloat(farmer.Farm_Size) || 0;
+                                let averageYield = parseFloat(farmer.Average_Yield) || 0;
+                                return sum + (farmSize * averageYield);
+                            }, 0);                    document.addEventListener("DOMContentLoaded", function() {
+
+                            console.log("Total Mother Seed Calculated:", totalMotherSeed);                            .then(response => response.json())
+
+                            // Display the total, formatted with commas
+                            document.getElementById("totalMotherSeed").textContent = totalMotherSeed.toLocaleString() + " seeds";
+                        })Array(data) || data.length === 0) {
+                        .catch(error => {data.");
+                            console.error('Error fetching mother seed count:', error);data";
+                            document.getElementById("totalMotherSeed").textContent = "Error";     return;
+                        });         }
+                });
+                </script>                                // Calculate total mother seed count (Farm_Size * Average_Yield)
+talMotherSeed = data.reduce((sum, farmer) => {
+                <!-- Content Row -->                                    let farmSize = parseFloat(farmer.Farm_Size) || 0;
+et averageYield = parseFloat(farmer.Average_Yield) || 0;
+                <div class="row">                                    return sum + (farmSize * averageYield);
+
+                    <!-- Area Chart -->
+                    <div class="col-xl-8 col-lg-7">Seed Calculated:", totalMotherSeed);
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->isplay the total, formatted with commas
+                            <div) + " seeds";
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Yield History</h6>
+                                <!-- Removed dropdown menu -->e.error('Error fetching mother seed count:', error);
+                            </div>tById("totalMotherSeed").textContent = "Error";
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>->
+                            </div>
+                        </div>="row">
+                    </div>
+>
+                    <!-- Pie Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div
+                                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Mother Seed Variations</h6>-- Removed dropdown menu -->
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <div class="chart-pie pt-4 pb-2">
+                                    <canvas id="myPieChart"></canvas>                                        <canvas id="myAreaChart"></canvas>
+
+                                </div>
+                                <div class="mt-4 text-center small">
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-primary"></i> All
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-success"></i> Cropadow mb-4">
+                                    </span> -->
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-info"></i> Type-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    </span>ass="m-0 font-weight-bold text-primary">Mother Seed Variations</h6>
+                                </div>
+                            </div>-- Card Body -->
+                        </div>  <div class="card-body">
+                    </div>          <div class="chart-pie pt-4 pb-2">
+                </div>                                        <canvas id="myPieChart"></canvas>
+
+                <!-- Content Row -->/div>
+                <div class="row">                                    <div class="mt-4 text-center small">
+lass="mr-2">
+                    <!-- Content Column -->                      <i class="fas fa-circle text-primary"></i> All
+                              </span>
+                                                                <span class="mr-2">
+                          <i class="fas fa-circle text-success"></i> Crop
+        </div></span>
+        <!-- End of Main Content -->                                        <span class="mr-2">
+                 <i class="fas fa-circle text-info"></i> Type
+        <!-- Footer -->          </span>
+        <div id="wrapper">
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <!-- Page content goes here -->div>
+                </div>
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Smart Seed 2025</span>
+                        </div>ontent Column -->
+                    </div>
+                </footer>      
+            </div>
+        </div>
+        <!-- End of Footer -->            <!-- End of Main Content -->
+
+    </div>  <!-- Footer -->
+</div>
+<!-- End of Page Wrapper -->                <div id="content-wrapper" class="d-flex flex-column">
+tent">
+<!-- Scroll to Top Button-->>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>            <footer class="sticky-footer bg-white">
+</a>                        <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" </div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>fa-angle-up"></i>
+            </div>
+        </div>
+    </div>ogout Modal-->
+</div>    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+<!-- Bootstrap core JavaScript-->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+-hidden="true">×</span>
+<!-- Core plugin JavaScript-->
+<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>                </div>
+Select "Logout" below if you are ready to end your current session.</div>
+<!-- Custom scripts for all pages-->
+<script src="../js/sb-admin-2.min.js"></script>                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+tn btn-primary" href="login.html">Logout</a>
+<!-- Page level plugins -->
+<script src="../vendor/chart.js/Chart.min.js"></script>            </div>
+
+<!-- Page level custom scripts -->
+<script src="../js/demo/chart-area-demo.js"></script>
+<script src="../js/demo/chart-pie-demo.js"></script>    <!-- Bootstrap core JavaScript-->
+/script>
+<script src="../js/fetchCropData.js"></script>    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ript src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+
+</html>    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
+
+    <script src="../js/fetchCropData.js"></script>
+
+</body>
+
+</html>

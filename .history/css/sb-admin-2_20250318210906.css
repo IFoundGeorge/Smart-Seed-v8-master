@@ -10226,19 +10226,14 @@ a:focus {
   outline: none;
 }
 
-/* Ensure the wrapper takes up the full height of the viewport */
 #wrapper {
   display: flex;
-  flex-direction: row; /* Sidebar and content side by side */
-  min-height: 100vh; /* Full height of the viewport */
 }
 
-/* Content wrapper styles */
-#content-wrapper {
-  margin-left: 250px; /* Leave space for the sidebar */
-  flex: 1; /* Allow the content to grow */
-  display: flex;
-  flex-direction: column;
+#wrapper #content-wrapper {
+  background-color: #f8f9fc;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #wrapper #content-wrapper #content {
@@ -10762,15 +10757,9 @@ a:focus {
   color: #858796;
 }
 
-/* Sidebar styles */
 .sidebar {
-  width: 250px; /* Set a fixed width for the sidebar */
-  min-height: 100vh; /* Ensure it spans the full height */
-  position: fixed; /* Keep it fixed on the side */
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  width: 6.5rem;
+  min-height: 100vh;
 }
 
 .sidebar .nav-item {
@@ -11740,21 +11729,34 @@ form.user .btn-user {
   animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
 
+/* Ensure the wrapper takes up the full height of the viewport */
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full height of the viewport */
+}
+
+/* Content wrapper should grow to fill available space */
+#content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Allow the content to grow and push the footer down */
+}
+
 /* Footer styles */
 footer.sticky-footer {
+  position: relative; /* Ensure it's not floating */
+  bottom: 0;
+  width: 100%; /* Make it span the full width */
   padding: 1rem 0;
-  flex-shrink: 0;
-  background-color: #ffffff;
-  text-align: center;
+  background-color: #ffffff; /* Optional: Set a background color */
+  text-align: center; /* Center the text */
 }
 
 footer.sticky-footer .copyright {
   line-height: 1;
   font-size: 0.8rem;
-}
-
-body.sidebar-toggled footer.sticky-footer {
-  width: 100%;
+  color: #858796; /* Optional: Set text color */
 }
 
 .styled-line {

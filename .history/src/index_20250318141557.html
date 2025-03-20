@@ -10,18 +10,17 @@
 
     <title>SB Admin 2 - Dashboard</title>
 
-    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
 
     <!-- Custom fonts for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../node_modules/startbootstrap-sb-admin-2/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
     <style type="text/css">
         /* Chart.js */
         @keyframes chartjs-render-animation {
@@ -68,81 +67,6 @@
             left: 0;
             top: 0
         }
-
-        .sidebar {
-            width: 250px;
-            min-height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        #content-wrapper {
-            margin-left: 250px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        footer.sticky-footer {
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            padding: 1rem 0;
-            background-color: #ffffff;
-            text-align: center;
-            flex-shrink: 0;
-        }
-    </style>
-    <style>
-        /* Change the color of sidebar links */
-        .sidebar .nav-item .nav-link {
-            color: white; /* Default text color */
-        }
-
-        /* Change the hover color for sidebar links */
-        .sidebar .nav-item .nav-link:hover {
-            background-color: #2e8b57; /* Darker green on hover */
-            color: white; /* Text color on hover */
-        }
-
-        /* Change the color of active sidebar links */
-        .sidebar .nav-item.active .nav-link {
-            background-color: #2e8b57; /* Darker green for active links */
-            color: white; /* Text color for active links */
-        }
-    </style>
-    <style>
-        /* Adjust content wrapper margin when the sidebar is toggled */
-        body.sidebar-toggled #content-wrapper {
-            margin-left: 100px; /* Adjust this value to match the collapsed sidebar width + margin */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
-
-        /* Adjust the sidebar width when toggled */
-        body.sidebar-toggled .sidebar {
-            width: 80px; /* Collapsed sidebar width */
-            transition: width 0.3s ease; /* Smooth transition */
-        }
-
-        /* Hide the sidebar text when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link span {
-            display: none; /* Hide the text */
-        }
-
-        /* Center the icons in the sidebar when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link {
-            text-align: center;
-            padding: 0.75rem 0;
-        }
-
-        /* Add margin to the content for better spacing */
-        #content-wrapper {
-            margin-left: 250px; /* Default margin when the sidebar is expanded */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
     </style>
 </head>
 
@@ -152,10 +76,13 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
+                
+                    <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
+                
                 <div class="sidebar-brand-text mx-3">Smart Seed</div>
             </a>
 
@@ -163,27 +90,25 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
+                    <span>Dashboard</span></a>
             </li>
 
+
             <!-- Nav Item - Farmers -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="farmers.html">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Farmers</span>
-                </a>
+                    <span>Farmers</span></a>
             </li>
 
             <!-- Nav Item - Info -->
             <li class="nav-item">
                 <a class="nav-link" href="info.html">
                     <i class="fas fa-fw fa-info-circle"></i>
-                    <span>Info</span>
-                </a>
+                    <span>Info</span></a>
             </li>
 
             <!-- Divider -->
@@ -193,8 +118,10 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-        </ul>
 
+            
+
+        </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -276,16 +203,10 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="printPage()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="printWebsiteImage()">
                             <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
                         </a>
                     </div>
-
-                    <script>
-                        function praintPage() {
-                            window.print();
-                        }
-                    </script>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -497,23 +418,18 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <div id="wrapper">
-                <div id="content-wrapper" class="d-flex flex-column">
-                    <div id="content">
-                        <!-- Page content goes here -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Smart Seed 2025</span>
                     </div>
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Smart Seed 2025</span>
-                            </div>
-                        </div>
-                    </footer>
                 </div>
-            </div>
+            </footer>
             <!-- End of Footer -->
 
         </div>
+        <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
 
@@ -543,9 +459,10 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"><s/script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
     <!-- Core plugin JavaScript-->
@@ -562,6 +479,39 @@
     <script src="../js/demo/chart-pie-demo.js"></script>
 
     <script src="../js/fetchCropData.js"></script>
+
+    <script>
+    function printWebsiteImage() {
+        // Use html2canvas to capture the page
+        html2canvas(document.body).then(canvas => {
+            // Convert the canvas to an image
+            const imgData = canvas.toDataURL("image/png");
+
+            // Create a new window for printing
+            const printWindow = window.open("", "_blank");
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Print Report</title>
+                    </head>
+                    <body>
+                        <img src="${imgData}" style="width: 100%; height: auto;" />
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+
+            // Trigger the print dialog
+            printWindow.onload = function () {
+                printWindow.print();
+                printWindow.close();
+            };
+        }).catch(error => {
+            console.error("Error capturing the page:", error);
+            alert("Failed to generate the report. Please try again.");
+        });
+    }
+    </script>
 
 </body>
 

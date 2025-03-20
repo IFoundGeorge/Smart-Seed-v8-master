@@ -11137,6 +11137,28 @@ a:focus {
   color: #fff;
 }
 
+/* Change the sidebar background color to green */
+.sidebar {
+    background-color: #3cb043; /* Green color */
+}
+
+/* Change the color of the active links (Dashboard, Farmers, Info) */
+.sidebar .nav-item.active .nav-link {
+    background-color: #2e8b57; /* Darker green for active links */
+    color: white; /* Text color for active links */
+}
+
+/* Change the hover color for links */
+.sidebar .nav-item .nav-link:hover {
+    background-color: #2e8b57; /* Darker green on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Change the text color of all links */
+.sidebar .nav-item .nav-link {
+    color: white; /* Default text color */
+}
+
 .sidebar-dark hr.sidebar-divider {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
