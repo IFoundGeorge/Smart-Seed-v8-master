@@ -71,12 +71,6 @@
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
     </style>
-    <style>
-    .deactivated {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
-    }
-</style>
 </head>
 
 
@@ -441,14 +435,13 @@
 
                             // Get the ID from the clicked row
                             const id = row.getAttribute("data-id");
-                            console.log("Row clicked, data-id:", id); // Debugging log
 
                             // Find the farmer object from the global farmersData array
                             const selected = window.farmersData.find((f) => f.id == id);
 
                             if (selected) {
                                 window.selectedFarmer = selected;
-                                console.log("Selected farmer:", window.selectedFarmer); // Debugging log
+                                console.log("Selected farmer:", window.selectedFarmer);
                             } else {
                                 window.selectedFarmer = null;
                                 console.error("Farmer not found in farmersData.");
@@ -481,119 +474,145 @@
                             let modal = new bootstrap.Modal(document.getElementById("farmerModal"));
                             modal.show();
                             } 
-                            // Function to deactivate a farmer
-                            function deactivateFarmer() {
-                                if (!window.selectedFarmer) {
-                                    alert("Please select a farmer to deactivate.");
-                                    console.error("No farmer selected."); // Debugging log
-                                    return;
-                                }
 
-                                const farmerId = parseInt(window.selectedFarmer.id, 10);
-                                console.log("Deactivating farmer with ID:", farmerId); // Debugging log
-
-                                fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
-                                    method: "PUT",
-                                    headers: {
-                                    "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({ deactivated: 1 }),
-                                })
-                                    .then((response) => {
-                                    if (!response.ok) {
-                                        throw new Error("Failed to update farmer status");
-                                    }
-                                    return response.json();
-                                    })
-                                    .then((data) => {
-                                    console.log("Farmer deactivated:", data);
-                                    alert("Farmer deactivated successfully.");
-                                    window.selectedFarmer.deactivated = 1;
-                                    document
-                                        .querySelector(`#dataTable tbody tr[data-id="${farmerId}"]`)
-                                        .classList.add("deactivated");
-                                    })
-                                    .catch((error) => {
-                                    console.error("Error deactivating farmer:", error);
-                                    alert("Error deactivating farmer.");
-                                    });
-                                }
-
-                            // Function to activate a farmer
-                            function activateFarmer() {
-                                if (!window.selectedFarmer) {
-                                    alert("Please select a farmer to activate.");
-                                    console.error("No farmer selected."); // Debugging log
-                                    return;
-                                }
-                            
-                                const farmerId = parseInt(window.selectedFarmer.id, 10);
-                                console.log("Activating farmer with ID:", farmerId); // Debugging log
-                            
-                                fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({ deactivated: 0 }),
-                                })
-                                    .then((response) => {
-                                        if (!response.ok) {
-                                            throw new Error("Failed to update farmer status");
-                                        }
-                                        return response.json();
-                                    })
-                                    .then((data) => {
-                                        window.selectedFarmer.deactivated = 0;
-                                        $(`#dataTable tbody tr[data-id="${farmerId}"]`).removeClass("deactivated");
-                                        $("#deactivateButton").prop("disabled", false);
-                                        $("#activateButton").prop("disabled", true);
-                                        alert("Farmer activated.");
-                                    })
-                                    .catch((error) => {
-                                        console.error("Error activating farmer:", error);
-                                        alert("Error activating farmer.");
-                                    });
+                        // Function to deactivate a farmer.
+                        function deactivateFarmer() {
+                            if (!window.selectedFarmer) {
+                                alert("Please select a farmer to deactivate.");
+                                return;
                             }
+                            
+                            // Show deactivation confirmation modal.
+                            let deactivateModal = new bootstrap.Modal(document.getElementById("deactivateModal"));
+                            deactivateModal.show();
 
-                            // Toggle Farmer Status Function
-                            function toggleFarmerStatus() {
-                                if (!window.selectedFarmer) {
-                                    alert("Please select a farmer.");
-                                    return;
-                                }
-
+                            document.getElementById("confirmDeactivateBtn").onclick = function() {
+                                // Ensure the ID is a number.
                                 const farmerId = parseInt(window.selectedFarmer.id, 10);
-                                const isCurrentlyDeactivated = window.selectedFarmer.deactivated == 1 || window.selectedFarmer.deactivated === "1";
-
-                                let confirmText = isCurrentlyDeactivated ? "Do you want to reactivate this account?" : "Do you want to deactivate this account?";
-                                if (!confirm(confirmText)) return;
-
+                                
                                 fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
-                                    method: "PUT",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ deactivated: isCurrentlyDeactivated ? 0 : 1 })
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                // Send deactivated as true (server should convert it to 1).
+                                body: JSON.stringify({ deactivated: true })
                                 })
                                 .then(response => {
-                                    if (!response.ok) throw new Error("Failed to update farmer status");
-                                    return response.json();
+                                if (!response.ok) {
+                                    throw new Error("Failed to update farmer status");
+                                }
+                                return response.json();
                                 })
                                 .then(data => {
-                                    window.selectedFarmer.deactivated = isCurrentlyDeactivated ? 0 : 1;
-                                    const row = $(`#dataTable tbody tr[data-id="${farmerId}"]`);
-                                    if (window.selectedFarmer.deactivated) {
-                                        row.addClass("deactivated");
-                                    } else {
-                                        row.removeClass("deactivated");
-                                    }
-                                    alert("Farmer status updated.");
+                                // Mark farmer as deactivated in the global object.
+                                window.selectedFarmer.deactivated = true;
+                                // Add the 'deactivated' class to the row.
+                                $('#dataTable tbody tr.selected').addClass('deactivated');
+                                alert("Farmer deactivated.");
+                                deactivateModal.hide();
                                 })
                                 .catch(error => {
-                                    console.error("Error updating farmer status:", error);
-                                    alert("Error updating farmer status.");
+                                console.error("Error deactivating farmer:", error);
+                                alert("Error deactivating farmer.");
+                                deactivateModal.hide();
                                 });
+                            };
                             }
 
+                            function activateFarmer() {
+                            if (!window.selectedFarmer) {
+                                alert("Please select a farmer to activate.");
+                                return;
+                            }
+                            
+                            // Check if the selected farmer is already active.
+                            if (!(window.selectedFarmer.deactivated == 1 || window.selectedFarmer.deactivated === "1")) {
+                                alert("This farmer is already active.");
+                                return;
+                            }
+                            
+                            // Confirm with the user.
+                            if (!confirm("Do you want to activate this account?")) {
+                                return;
+                            }
+                            
+                            const farmerId = parseInt(window.selectedFarmer.id, 10);
+                            
+                            // Send PUT request to update the farmer's deactivated status to 0.
+                            fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
+                                method: 'PUT',
+                                headers: {
+                                'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ deactivated: 0 })
+                            })
+                            .then(response => {
+                                if (!response.ok) {
+                                throw new Error("Failed to update farmer status");
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                // Update local data: mark the farmer as active.
+                                window.selectedFarmer.deactivated = 0;
+                                // Remove the 'deactivated' class from the corresponding table row.
+                                $(`#dataTable tbody tr[data-id="${farmerId}"]`).removeClass("deactivated");
+                                alert("Farmer activated.");
+                            })
+                            .catch(error => {
+                                console.error("Error activating farmer:", error);
+                                alert("Error activating farmer.");
+                            });
+                            }
+
+                            function updatePieChart(data) {
+                                console.log("Updating pie chart with data:", data);
+                                // Add pie chart update logic here
+                            }
+
+                       
+                            function toggleFarmerStatus() {
+                            if (!window.selectedFarmer) {
+                                alert("Please select a farmer.");
+                                return;
+                            }
+
+                            const farmerId = parseInt(window.selectedFarmer.id, 10);
+                            const isCurrentlyDeactivated = window.selectedFarmer.deactivated;
+
+                            // Show appropriate confirmation modal
+                            let confirmText = isCurrentlyDeactivated
+                                ? "Do you want to reactivate this account?"
+                                : "Do you want to deactivate this account?";
+                            if (!confirm(confirmText)) return;
+
+                            // Update the server
+                            fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ deactivated: !isCurrentlyDeactivated })
+                            })
+                            .then(response => {
+                                if (!response.ok) throw new Error("Failed to update farmer status");
+                                return response.json();
+                            })
+                            .then(data => {
+                                // Update the local state
+                                window.selectedFarmer.deactivated = !isCurrentlyDeactivated;
+                                const row = $(`#dataTable tbody tr[data-id="${farmerId}"]`);
+                                if (window.selectedFarmer.deactivated) {
+                                row.addClass('deactivated');
+                                } else {
+                                row.removeClass('deactivated');
+                                }
+                                alert("Farmer status updated.");
+                            })
+                            .catch(error => {
+                                console.error("Error updating farmer status:", error);
+                                alert("Error updating farmer status.");
+                            });
+                            }
 
                             function printFarmers() {
                                 // 1. Make sure the DataTable is fully loaded
@@ -755,7 +774,6 @@
                                 .then((response) => response.json())
                                 .then((data) => {
                                     window.farmersData = data; // Store the data globally
-                                    console.log("Farmers data loaded:", data); // Debugging log
                                     populateTable(data); // Populate the table with the data
                                 })
                                 .catch((error) => {
@@ -764,23 +782,25 @@
                         });
 
                         function populateTable(data) {
-                            console.log("Populating table with data:", data);
-                            let rows = "";
-                            data.forEach(function (farmer) {
-                                // Add the 'deactivated' class if the farmer is deactivated
-                                const rowClass = farmer.deactivated === 1 ? "deactivated" : "";
+                            const tableBody = document.querySelector("#dataTable tbody");
+                            tableBody.innerHTML = ""; // Clear existing rows
 
-                                rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}" class="${rowClass}">
-                                            <td>${farmer.Name || ""}</td>
-                                            <td>${farmer.Location || ""}</td>
-                                            <td>${farmer.Phone_Number || ""}</td>
-                                            <td>${farmer.Crop_Type || ""}</td>
-                                            <td>${farmer.Farm_Size || ""}</td>
-                                            <td>${farmer.Average_Yield || ""}</td>
-                                        </tr>`;
+                            data.forEach((farmer) => {
+                                const row = document.createElement("tr");
+                                row.setAttribute("data-id", farmer.id); // Add farmer ID to the row
+                                row.setAttribute("onclick", "setSelectedFarmer(this)"); // Make row clickable
+
+                                row.innerHTML = `
+                                    <td>${farmer.name}</td>
+                                    <td>${farmer.location}</td>
+                                    <td>${farmer.phone_number}</td>
+                                    <td>${farmer.crop}</td>
+                                    <td>${farmer.farm_size}</td>
+                                    <td>${farmer.average_yield}</td>
+                                `;
+
+                                tableBody.appendChild(row);
                             });
-
-                            document.querySelector("#dataTable tbody").innerHTML = rows;
                         }
                     </script>
     </div>

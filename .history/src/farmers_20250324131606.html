@@ -1,69 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("http://localhost:3000/api/farmers")
+        .then((response) => response.json())
+        .then((data) => {
+            window.farmersData = data; // Store the data globally
+            console.log("Farmers data loaded:", data); // Debugging log
+            populateTable(data); // Populate the table with the data    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        })port" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        .catch((error) => {">
+            console.error("Error fetching farmers:", error);
+        });
+});Smart Seed</title>
 
-<head>
+function populateTable(data) {/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    let rows = "";
+    data.forEach(function (farmer) {
+        rows += `<tr data-id="${farmer.id}" data-deactivated="${dmin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+            farmer.deactivated
+        }">onts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+                    <td>${farmer.Name || ""}</td>el="stylesheet">
+                    <td>${farmer.Location || ""}</td>
+                    <td>${farmer.Crop_Type || ""}</td>e-->
+                    <td>${farmer.Phone_Number || ""}</td>    <link href="../../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
+                    <td>${farmer.Farm_Size || ""}</td>
+                    <td>${farmer.Average_Yield || ""}</td>    <link href="../../css/sb-admin-2.css" rel="stylesheet">
+                </tr>`;
+    });
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Smart Seed</title>
-
-    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- Custom fonts for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="../../node_modules/startbootstrap-sb-admin-2/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <link href="../../css/sb-admin-2.css" rel="stylesheet">
-    <style>
-        /* Change the color of sidebar links */
-        .sidebar .nav-item .nav-link {
-            color: white; /* Default text color */
+    $("#dataTable tbody").html(rows);
         }
+    let table = $("#dataTable").DataTable();
+ sidebar links */
+    // Ensure the correct farmer is selected        .sidebar .nav-item .nav-link:hover {
+    $("#dataTable tbody").on("click", "tr", function () {Darker green on hover */
+        // Remove 'selected' class from all rows
+        $("#dataTable tbody tr").removeClass("selected");
 
-        /* Change the hover color for sidebar links */
-        .sidebar .nav-item .nav-link:hover {
-            background-color: #2e8b57; /* Darker green on hover */
-            color: white; /* Text color on hover */
-        }
+        // Add 'selected' class to the clicked row
+        $(this).addClass("selected");
+Darker green for active links */
+        // Get the ID from the clicked row  color: white; /* Text color for active links */
+        const id = parseInt($(this).data("id"), 10);        }
+        console.log("Row clicked, data-id:", id); // Debugging log
 
-        /* Change the color of active sidebar links */
-        .sidebar .nav-item.active .nav-link {
-            background-color: #2e8b57; /* Darker green for active links */
-            color: white; /* Text color for active links */
+        // Find the farmer object from the global farmersData array margin when the sidebar is toggled */
+        window.selectedFarmer = window.farmersData.find(ody.sidebar-toggled #content-wrapper {
+            (f) => parseInt(f.id, 10) === id            margin-left: 100px; /* Adjust this value to match the collapsed sidebar width + margin */
+        );
         }
-    </style>
-    <style>
-        /* Adjust content wrapper margin when the sidebar is toggled */
-        body.sidebar-toggled #content-wrapper {
-            margin-left: 100px; /* Adjust this value to match the collapsed sidebar width + margin */
-            transition: margin-left 0.3s ease; /* Smooth transition */
-        }
+        if (!window.selectedFarmer) {
+            console.error("Farmer not found in farmersData.");djust the sidebar width when toggled */
+            return; // Safety check
+        } */
+ transition: width 0.3s ease; /* Smooth transition */
+        console.log("Selected Farmer:", window.selectedFarmer); // Debugging log
 
-        /* Adjust the sidebar width when toggled */
-        body.sidebar-toggled .sidebar {
-            width: 80px; /* Collapsed sidebar width */
-            transition: width 0.3s ease; /* Smooth transition */
-        }
+        // Enable/Disable buttons based on the farmer's statusthe sidebar text when toggled */
+        if ( span {
+            window.selectedFarmer.deactivated == 1 ||
+            window.selectedFarmer.deactivated === "1"
+        ) {
+            $("#deactivateButton").prop("disabled", true);  /* Center the icons in the sidebar when toggled */
+            $("#activateButton").prop("disabled", false);
+        } else {         text-align: center;
+            $("#deactivateButton").prop("disabled", false);            padding: 0.75rem 0;
 
-        /* Hide the sidebar text when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link span {
-            display: none; /* Hide the text */
-        }
 
-        /* Center the icons in the sidebar when toggled */
-        body.sidebar-toggled .sidebar .nav-item .nav-link {
-            text-align: center;
-            padding: 0.75rem 0;
-        }
+
+
+
+}    });        }            $("#activateButton").prop("disabled", true);        }
 
         /* Add margin to the content for better spacing */
         #content-wrapper {
@@ -71,12 +76,6 @@
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
     </style>
-    <style>
-    .deactivated {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
-    }
-</style>
 </head>
 
 
@@ -495,29 +494,28 @@
                                 fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
                                     method: "PUT",
                                     headers: {
-                                    "Content-Type": "application/json",
+                                        "Content-Type": "application/json",
                                     },
                                     body: JSON.stringify({ deactivated: 1 }),
                                 })
                                     .then((response) => {
-                                    if (!response.ok) {
-                                        throw new Error("Failed to update farmer status");
-                                    }
-                                    return response.json();
+                                        if (!response.ok) {
+                                            throw new Error("Failed to update farmer status");
+                                        }
+                                        return response.json();
                                     })
                                     .then((data) => {
-                                    console.log("Farmer deactivated:", data);
-                                    alert("Farmer deactivated successfully.");
-                                    window.selectedFarmer.deactivated = 1;
-                                    document
-                                        .querySelector(`#dataTable tbody tr[data-id="${farmerId}"]`)
-                                        .classList.add("deactivated");
+                                        window.selectedFarmer.deactivated = 1;
+                                        $(`#dataTable tbody tr[data-id="${farmerId}"]`).addClass("deactivated");
+                                        $("#deactivateButton").prop("disabled", true);
+                                        $("#activateButton").prop("disabled", false);
+                                        alert("Farmer deactivated.");
                                     })
                                     .catch((error) => {
-                                    console.error("Error deactivating farmer:", error);
-                                    alert("Error deactivating farmer.");
+                                        console.error("Error deactivating farmer:", error);
+                                        alert("Error deactivating farmer.");
                                     });
-                                }
+                            }
 
                             // Function to activate a farmer
                             function activateFarmer() {
@@ -764,23 +762,25 @@
                         });
 
                         function populateTable(data) {
-                            console.log("Populating table with data:", data);
-                            let rows = "";
-                            data.forEach(function (farmer) {
-                                // Add the 'deactivated' class if the farmer is deactivated
-                                const rowClass = farmer.deactivated === 1 ? "deactivated" : "";
+                            const tableBody = document.querySelector("#dataTable tbody");
+                            tableBody.innerHTML = ""; // Clear existing rows
 
-                                rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}" class="${rowClass}">
-                                            <td>${farmer.Name || ""}</td>
-                                            <td>${farmer.Location || ""}</td>
-                                            <td>${farmer.Phone_Number || ""}</td>
-                                            <td>${farmer.Crop_Type || ""}</td>
-                                            <td>${farmer.Farm_Size || ""}</td>
-                                            <td>${farmer.Average_Yield || ""}</td>
-                                        </tr>`;
+                            data.forEach((farmer) => {
+                                const row = document.createElement("tr");
+                                row.setAttribute("data-id", farmer.id); // Add farmer ID to the row
+                                row.setAttribute("onclick", "setSelectedFarmer(this)"); // Make row clickable
+
+                                row.innerHTML = `
+                                    <td>${farmer.name}</td>
+                                    <td>${farmer.location}</td>
+                                    <td>${farmer.phone_number}</td>
+                                    <td>${farmer.crop}</td>
+                                    <td>${farmer.farm_size}</td>
+                                    <td>${farmer.average_yield}</td>
+                                `;
+
+                                tableBody.appendChild(row);
                             });
-
-                            document.querySelector("#dataTable tbody").innerHTML = rows;
                         }
                     </script>
     </div>

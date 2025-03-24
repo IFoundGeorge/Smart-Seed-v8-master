@@ -71,12 +71,6 @@
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
     </style>
-    <style>
-    .deactivated {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
-    }
-</style>
 </head>
 
 
@@ -764,11 +758,10 @@
                         });
 
                         function populateTable(data) {
-                            console.log("Populating table with data:", data);
                             let rows = "";
                             data.forEach(function (farmer) {
                                 // Add the 'deactivated' class if the farmer is deactivated
-                                const rowClass = farmer.deactivated === 1 ? "deactivated" : "";
+                                const rowClass = farmer.deactivated ? "deactivated" : "";
 
                                 rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}" class="${rowClass}">
                                             <td>${farmer.Name || ""}</td>

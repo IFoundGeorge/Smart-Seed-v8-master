@@ -71,12 +71,6 @@
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
     </style>
-    <style>
-    .deactivated {
-        background-color: #f8d7da; /* Light red background */
-        color: #721c24; /* Dark red text */
-    }
-</style>
 </head>
 
 
@@ -493,7 +487,7 @@
                                 console.log("Deactivating farmer with ID:", farmerId); // Debugging log
 
                                 fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
-                                    method: "PUT",
+                                    method: "PATCH",
                                     headers: {
                                     "Content-Type": "application/json",
                                     },
@@ -764,13 +758,9 @@
                         });
 
                         function populateTable(data) {
-                            console.log("Populating table with data:", data);
                             let rows = "";
                             data.forEach(function (farmer) {
-                                // Add the 'deactivated' class if the farmer is deactivated
-                                const rowClass = farmer.deactivated === 1 ? "deactivated" : "";
-
-                                rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}" class="${rowClass}">
+                                rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}">
                                             <td>${farmer.Name || ""}</td>
                                             <td>${farmer.Location || ""}</td>
                                             <td>${farmer.Phone_Number || ""}</td>

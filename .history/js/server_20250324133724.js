@@ -34,22 +34,17 @@ const yieldDb = new sqlite3.Database(
 );
 
 // Farmers Database
-const farmersDb = new sqlite3.Database(farmersDbPath, (err) => {
-  if (err) {
-    console.error("Error opening farmers database:", err.message);
-  } else {
-    console.log("✅ Connected to farmers.db.");
+const farmersDb = new sqlite3.Database(
+  farmersDbPath,
+  sqlite3.OPEN_READWRITE,
+  (err) => {
+    if (err) {
+      console.error("❌ Error connecting to farmers.db:", err.message);
+    } else {
+      console.log("✅ Connected to farmers.db.");
+    }
   }
-});
-
-// Use `farmersDb` for queries related to the farmers database
-farmersDb.all("SELECT * FROM farmers", [], (err, rows) => {
-  if (err) {
-    console.error("Error fetching farmers:", err.message);
-  } else {
-    console.log("Farmers data:", rows);
-  }
-});
+);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
@@ -79,20 +74,18 @@ app.get("/api/crop_distribution", (req, res) => {
     [],
     (err, rows) => {
       if (err) {
-        console.error("Error fetching crop distribution:", err.message);
-        res.status(500).json({ error: "Failed to fetch crop distribution" });
-      } else {
-        res.json(rows);
+        return res.status(500).json({ error: err.message });
       }
+      res.json(rows);
     }
   );
 });
 
 // Fetch all farmers
 app.get("/api/farmers", (req, res) => {
-  farmersDb.all("SELECT * FROM farmers", [], (err, rows) => {
+  db.all("SELECT rowid AS id, * FROM farmers", [], (err, rows) => {
     if (err) {
-      console.error("Error fetching farmers:", err.message);
+      console.error(err.message);
       res.status(500).json({ error: "Failed to fetch farmers" });
     } else {
       res.json(rows);
@@ -122,7 +115,7 @@ app.post("/api/farmers", (req, res) => {
         VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-  db.run(
+  farmersDb.run(
     insertFarmer,
     [name, location, crop, phone_number, farm_size, average_yield],
     function (err) {
@@ -131,7 +124,7 @@ app.post("/api/farmers", (req, res) => {
         return res.status(500).json({ error: err.message });
       }
 
-      db.get(
+      farmersDb.get(
         "SELECT SUM(Average_Yield) AS totalYield, SUM(Farm_Size) AS totalSize FROM farmers",
         (err, totals) => {
           if (err) {
@@ -170,28 +163,6 @@ app.post("/api/farmers", (req, res) => {
       );
     }
   );
-});
-
-// Deactivate a farmer
-app.put("/api/farmers/:id", (req, res) => {
-  const farmerId = req.params.id;
-
-  const deactivateFarmerQuery = `
-    UPDATE farmers
-    SET deactivated = 1
-    WHERE id = ?
-  `;
-
-  farmersDb.run(deactivateFarmerQuery, [farmerId], function (err) {
-    if (err) {
-      console.error("Error deactivating farmer:", err.message);
-      res.status(500).json({ error: "Failed to deactivate farmer" });
-    } else if (this.changes === 0) {
-      res.status(404).json({ error: "Farmer not found" });
-    } else {
-      res.json({ message: "Farmer deactivated successfully" });
-    }
-  });
 });
 
 // Start the server

@@ -172,28 +172,6 @@ app.post("/api/farmers", (req, res) => {
   );
 });
 
-// Deactivate a farmer
-app.put("/api/farmers/:id", (req, res) => {
-  const farmerId = req.params.id;
-
-  const deactivateFarmerQuery = `
-    UPDATE farmers
-    SET deactivated = 1
-    WHERE id = ?
-  `;
-
-  farmersDb.run(deactivateFarmerQuery, [farmerId], function (err) {
-    if (err) {
-      console.error("Error deactivating farmer:", err.message);
-      res.status(500).json({ error: "Failed to deactivate farmer" });
-    } else if (this.changes === 0) {
-      res.status(404).json({ error: "Farmer not found" });
-    } else {
-      res.json({ message: "Farmer deactivated successfully" });
-    }
-  });
-});
-
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {

@@ -25,29 +25,18 @@ $(document).ready(function () {
 
       // Ensure the correct farmer is selected
       $("#dataTable tbody").on("click", "tr", function () {
-        // Remove 'selected' class from all rows
         $("#dataTable tbody tr").removeClass("selected");
-
-        // Add 'selected' class to the clicked row
         $(this).addClass("selected");
 
-        // Get the ID from the clicked row
         const id = parseInt($(this).data("id"), 10);
-        console.log("Row clicked, data-id:", id); // Debugging log
-
-        // Find the farmer object from the global farmersData array
         window.selectedFarmer = window.farmersData.find(
           (f) => parseInt(f.id, 10) === id
         );
 
-        if (!window.selectedFarmer) {
-          console.error("Farmer not found in farmersData.");
-          return; // Safety check
-        }
-
+        if (!window.selectedFarmer) return; // Safety check
         console.log("Selected Farmer:", window.selectedFarmer); // Debugging log
 
-        // Enable/Disable buttons based on the farmer's status
+        // Enable/Disable buttons based on status
         if (
           window.selectedFarmer.deactivated == 1 ||
           window.selectedFarmer.deactivated === "1"
