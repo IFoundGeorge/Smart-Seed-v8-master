@@ -232,7 +232,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -634,64 +634,6 @@
     <script src="../../js/demo/chart-pie-demo.js"></script>
 
     <script src="../../js/fetchCropData.js"></script>
-
-    <script>
-    function printPage() {
-        console.log("Print function triggered"); // Debugging log
-
-        // Hide all elements except the graphs and cards
-        const elementsToHide = document.querySelectorAll("body > *:not(#content-wrapper)");
-        elementsToHide.forEach((el) => {
-            console.log("Hiding element:", el); // Debugging log
-            el.style.display = "none";
-        });
-
-        // Show only the cards and graphs
-        const contentWrapper = document.getElementById("content-wrapper");
-        contentWrapper.style.marginLeft = "0"; // Remove sidebar margin for printing
-        console.log("Content wrapper adjusted for printing");
-
-        // Trigger the print dialog
-        window.print();
-        console.log("Print dialog triggered");
-
-        // Restore the original layout after printing
-        elementsToHide.forEach((el) => {
-            el.style.display = "";
-        });
-        contentWrapper.style.marginLeft = "250px"; // Restore sidebar margin
-        console.log("Layout restored after printing");
-    }
-    </script>
-
-    <script>
-    function generateReport() {
-        console.log("Generate Report function triggered"); // Debugging log
-
-        // Hide all elements except the graphs and cards
-        const elementsToHide = document.querySelectorAll("body > *:not(#content-wrapper)");
-        elementsToHide.forEach((el) => {
-            console.log("Hiding element:", el); // Debugging log
-            el.style.display = "none";
-        });
-
-        // Show only the cards and graphs
-        const contentWrapper = document.getElementById("content-wrapper");
-        contentWrapper.style.marginLeft = "0"; // Remove sidebar margin for printing
-        console.log("Content wrapper adjusted for printing");
-
-        // Trigger the print dialog
-        window.print();
-        console.log("Print dialog triggered");
-
-        // Restore the original layout after printing
-        elementsToHide.forEach((el) => {
-            el.style.display = "";
-        });
-        contentWrapper.style.marginLeft = "250px"; // Restore sidebar margin
-        console.log("Layout restored after printing");
-    }
-    </script>
 
 </body>
 

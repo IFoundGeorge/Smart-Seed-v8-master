@@ -188,33 +188,6 @@
         margin-bottom: 15px; /* Reduce space between cards */
       }
     </style>
-    <style>
-      @media print {
-        .sidebar,
-        .navbar,
-        footer,
-        .scroll-to-top {
-          display: none !important; /* Hide sidebar, navbar, footer, and scroll-to-top button */
-        }
-
-        #content-wrapper {
-          margin: 0 !important;
-          padding: 0 !important;
-          width: 100% !important;
-        }
-
-        .container-fluid {
-          display: block !important;
-        }
-
-        .card,
-        .chart-area,
-        .chart-pie {
-          display: block !important;
-          page-break-inside: avoid; /* Prevent page breaks inside cards or charts */
-        }
-      }
-    </style>
   </head>
 
   <body id="page-top">
@@ -364,7 +337,7 @@
                     data-target="#logoutModal"
                   >
                     <i
-                      class="fas fa-sign-out-aslt fa-sm fa-fw mr-2 text-gray-400"
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                     ></i>
                     Logout
                   </a>

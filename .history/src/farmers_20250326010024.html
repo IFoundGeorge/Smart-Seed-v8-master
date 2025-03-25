@@ -71,6 +71,25 @@
             transition: margin-left 0.3s ease; /* Smooth transition */
         }
     </style>
+    <style>
+    .deactivated {
+        background-color: #f8d7da; /* Light red background */
+        color: #721c24; /* Dark red text */
+    }
+</style>
+    <style>
+    /* Change the color of active sidebar links */
+    .sidebar .nav-item.active .nav-link {
+        background-color: #2e8b57; /* Dark green background */
+        color: white; /* White text color */
+    }
+
+    /* Optional: Add hover effect for active links */
+    .sidebar .nav-item.active .nav-link:hover {
+        background-color: #276c4a; /* Slightly darker green on hover */
+        color: white;
+    }
+</style>
 </head>
 
 
@@ -82,7 +101,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brsand d-flex align-items-center justify-content-center" href="index.html">
                 <img src="../../img/smartseed_logo.jpg" alt="Smart Seed Logo">
                 <div class="sidebar-brand-text mx-3">Smart Seed</div>
             </a>
@@ -241,6 +260,12 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
+                    <!-- End of Table -->
+
+                    
+    <!-- End of Page Wrapper -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -330,10 +355,9 @@
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">f
+                <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <!-- Redirect to login.html -->
-                    <a class="btn btn-primary" href="../login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -358,37 +382,30 @@
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Custom Admin Dashboard Scripts -->
-<script src="../../js/sb-admin-2.min.js"></script>
+<script src="../js/sb-admin-2.min.js"></script>
 
 <!-- Custom DataTable Demo Script -->
-<script src="../../js/demo/datatables-demo.js"></script>
+<script src="../js/demo/datatables-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js First -->
-<script src="../../js/demo/chart-area-demo.js"></script> <!-- Define updatePieChart -->
+<script src="../js/demo/chart-area-demo.js"></script> <!-- Define updatePieChart -->
 <script>
   fetchCropData(); // Call fetch AFTER scripts load
 </script>
+
 <script>
-function populateTable(data) {
-    console.log("Populating table with data:", data);
-    let rows = "";
-    data.forEach(function (farmer) {
-        // Add the 'deactivated' class if the farmer is deactivated
-        const rowClass = farmer.deactivated === 1 ? "deactivated" : "";
-
-        rows += `<tr data-id="${farmer.id}" data-deactivated="${farmer.deactivated}" class="${rowClass}">
-                    <td>${farmer.Name || ""}</td>
-                    <td>${farmer.Location || ""}</td>
-                    <td>${farmer.Phone_Number || ""}</td>
-                    <td>${farmer.Crop_Type || ""}</td>
-                    <td>${farmer.Farm_Size || ""}</td>
-                    <td>${farmer.Average_Yield || ""}</td>
-                </tr>`;
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("http://localhost:3000/api/farmers")
+            .then((response) => response.json())
+            .then((data) => {
+                window.farmersData = data; // Store the data globally
+                console.log("Farmers data loaded:", data); // Debugging log
+                populateTable(data); // Populate the table with the data
+            })
+            .catch((error) => {
+                console.error("Error fetching farmers:", error);
+            });
     });
-
-    document.querySelector("#dataTable tbody").innerHTML = rows;
-}
 </script>
-
 </body>
 
 </html>

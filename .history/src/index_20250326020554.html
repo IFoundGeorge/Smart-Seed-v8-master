@@ -176,7 +176,7 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #3cb043;">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <img src="../../img/smartseed_logo.jpg" alt="Smart Seed Logo">
+                <img src="../img/smartseed_logo.jpg" alt="Smart Seed Logo">
                 <div class="sidebar-brand-text mx-3">Smart Seed</div>
             </a>
 
@@ -232,7 +232,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -269,7 +269,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                                 <img class="img-profile rounded-circle"
-                                    src="../../img/undraw_profile.svg">
+                                    src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -293,9 +293,17 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" onclick="generateReport()" style="background-color: #2e8b57; border-color: #2e8b57; color: white;">
+                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+                        </a>
+                    </div>
+
                     <script>
-                        function praintPage() {
+                        function printPage() {
                             window.print();
                         }
                     </script>
@@ -607,62 +615,32 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <!-- Redirect to login.html -->
-                    <a class="btn btn-primary" href="../login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js"></script>
+    <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/chart-area-demo.js"></script>
-    <script src="../../js/demo/chart-pie-demo.js"></script>
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
 
-    <script src="../../js/fetchCropData.js"></script>
-
-    <script>
-    function printPage() {
-        console.log("Print function triggered"); // Debugging log
-
-        // Hide all elements except the graphs and cards
-        const elementsToHide = document.querySelectorAll("body > *:not(#content-wrapper)");
-        elementsToHide.forEach((el) => {
-            console.log("Hiding element:", el); // Debugging log
-            el.style.display = "none";
-        });
-
-        // Show only the cards and graphs
-        const contentWrapper = document.getElementById("content-wrapper");
-        contentWrapper.style.marginLeft = "0"; // Remove sidebar margin for printing
-        console.log("Content wrapper adjusted for printing");
-
-        // Trigger the print dialog
-        window.print();
-        console.log("Print dialog triggered");
-
-        // Restore the original layout after printing
-        elementsToHide.forEach((el) => {
-            el.style.display = "";
-        });
-        contentWrapper.style.marginLeft = "250px"; // Restore sidebar margin
-        console.log("Layout restored after printing");
-    }
-    </script>
+    <script src="../js/fetchCropData.js"></script>
 
     <script>
     function generateReport() {

@@ -188,33 +188,6 @@
         margin-bottom: 15px; /* Reduce space between cards */
       }
     </style>
-    <style>
-      @media print {
-        .sidebar,
-        .navbar,
-        footer,
-        .scroll-to-top {
-          display: none !important; /* Hide sidebar, navbar, footer, and scroll-to-top button */
-        }
-
-        #content-wrapper {
-          margin: 0 !important;
-          padding: 0 !important;
-          width: 100% !important;
-        }
-
-        .container-fluid {
-          display: block !important;
-        }
-
-        .card,
-        .chart-area,
-        .chart-pie {
-          display: block !important;
-          page-break-inside: avoid; /* Prevent page breaks inside cards or charts */
-        }
-      }
-    </style>
   </head>
 
   <body id="page-top">
@@ -364,7 +337,7 @@
                     data-target="#logoutModal"
                   >
                     <i
-                      class="fas fa-sign-out-aslt fa-sm fa-fw mr-2 text-gray-400"
+                      class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                     ></i>
                     Logout
                   </a>
@@ -384,7 +357,7 @@
               <a
                 href="#"
                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                onclick="window.print()"
+                onclick="printPage()"
                 style="
                   background-color: #2e8b57;
                   border-color: #2e8b57;
@@ -805,6 +778,21 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-md-6 text-center text-md-left">
+            <span>Copyright &copy; Smart Seed 2025</span>
+          </div>
+          <div class="col-md-6 text-center text-md-right">
+            <a href="#" class="text-primary">Privacy Policy</a> |
+            <a href="#" class="text-primary">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
