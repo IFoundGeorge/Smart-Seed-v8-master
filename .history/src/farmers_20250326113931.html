@@ -505,28 +505,26 @@
                                 const farmerId = parseInt(window.selectedFarmer.id, 10);
                                 console.log("Deactivating farmer with ID:", farmerId); // Debugging log
 
-                                fetch(`http://localhost:3000/api/farmers/${farmerId}/deactivate`, {
+                                fetch(`http://localhost:3000/api/farmers/${farmerId}`, {
                                     method: "PUT",
                                     headers: {
                                     "Content-Type": "application/json",
                                     },
+                                    body: JSON.stringify({ deactivated: 1 }),
                                 })
                                     .then((response) => {
                                     if (!response.ok) {
-                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                        throw new Error("Failed to update farmer status");
                                     }
                                     return response.json();
                                     })
                                     .then((data) => {
-                                    if (data.success) {
-                                        console.log("Farmer deactivated successfully:", data); // Debugging log
-                                        window.selectedFarmer.deactivated = 1;
-                                        $(`#dataTable tbody tr[data-id="${farmerId}"]`).addClass("deactivated");
-                                        alert("Farmer deactivated successfully.");
-                                    } else {
-                                        console.error("Failed to deactivate farmer:", data.message);
-                                        alert(data.message);
-                                    }
+                                    console.log("Farmer deactivated:", data);
+                                    alert("Farmer deactivated successfully.");
+                                    window.selectedFarmer.deactivated = 1;
+                                    document
+                                        .querySelector(`#dataTable tbody tr[data-id="${farmerId}"]`)
+                                        .classList.add("deactivated");
                                     })
                                     .catch((error) => {
                                     console.error("Error deactivating farmer:", error);

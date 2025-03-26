@@ -173,7 +173,7 @@ app.post("/api/farmers", (req, res) => {
 });
 
 // Deactivate a farmer
-app.put("/api/farmers/:id/deactivate", (req, res) => {
+app.put("/api/farmers/:id", (req, res) => {
   const farmerId = req.params.id;
 
   const deactivateFarmerQuery = `
@@ -185,22 +185,17 @@ app.put("/api/farmers/:id/deactivate", (req, res) => {
   farmersDb.run(deactivateFarmerQuery, [farmerId], function (err) {
     if (err) {
       console.error("Error deactivating farmer:", err.message);
-      res
-        .status(500)
-        .json({ success: false, message: "Failed to deactivate farmer." });
+      res.status(500).json({ error: "Failed to deactivate farmer" });
     } else if (this.changes === 0) {
-      res.status(404).json({
-        success: false,
-        message: "Farmer not found or already deactivated.",
-      });
+      res.status(404).json({ error: "Farmer not found" });
     } else {
-      res.json({ success: true, message: "Farmer deactivated successfully." });
+      res.json({ message: "Farmer deactivated successfully" });
     }
   });
 });
 
 // Activate a farmer
-app.put("/api/farmers/:id/activate", (req, res) => {
+app.put("/api/farmers/:id", (req, res) => {
   const farmerId = req.params.id;
 
   const activateFarmerQuery = `
@@ -214,7 +209,7 @@ app.put("/api/farmers/:id/activate", (req, res) => {
       console.error("Error activating farmer:", err.message);
       res.status(500).json({
         success: false,
-        message: "Failed to activate farmer.",
+        message: "Database error.",
         error: err.message,
       });
     } else if (this.changes === 0) {

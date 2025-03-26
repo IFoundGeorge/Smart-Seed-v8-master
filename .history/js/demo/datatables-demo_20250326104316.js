@@ -28,6 +28,15 @@ $(document).ready(function () {
       // Initialize DataTable
       let table = $("#dataTable").DataTable();
 
+      // Reapply the 'deactivated' class after DataTable initialization
+      data.forEach(function (farmer) {
+        if (farmer.deactivated == 1) {
+          $(`#dataTable tbody tr[data-id="${farmer.id}"]`).addClass(
+            "deactivated"
+          );
+        }
+      });
+
       // Ensure the correct farmer is selected
       $("#dataTable tbody").on("click", "tr", function () {
         // Remove 'selected' class from all rows
@@ -52,8 +61,11 @@ $(document).ready(function () {
 
         console.log("Selected Farmer:", window.selectedFarmer); // Debugging log
 
-        // Enable/Disable buttons based on the farmer's status
-        if (window.selectedFarmer.deactivated == 1) {
+        // Enable/Disable buttons based on the farmer's statusz
+        if (
+          window.selectedFarmer.deactivated == 1 ||
+          window.selectedFarmer.deactivated === "1"
+        ) {
           $("#deactivateButton").prop("disabled", true);
           $("#activateButton").prop("disabled", false);
         } else {

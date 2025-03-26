@@ -7,6 +7,8 @@ $(document).ready(function () {
 
       let rows = "";
       data.forEach(function (farmer) {
+        console.log("Farmer deactivated status:", farmer.deactivated); // Debugging log
+
         // Add the 'deactivated' class if the farmer is deactivated
         const rowClass = farmer.deactivated == 1 ? "deactivated" : "";
 
@@ -26,9 +28,9 @@ $(document).ready(function () {
       $("#dataTable tbody").html(rows);
 
       // Initialize DataTable
-      let table = $("#dataTable").DataTable();
+      $("#dataTable").DataTable();
 
-      // Ensure the correct farmer is selected
+      // Add click event for row selection
       $("#dataTable tbody").on("click", "tr", function () {
         // Remove 'selected' class from all rows
         $("#dataTable tbody tr").removeClass("selected");
