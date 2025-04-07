@@ -1,0 +1,30 @@
+let captchaVerified = false; // Track CAPTCHA status // Function to validate
+CAPTCHA before login function validateLogin(event) { // Prevent the form
+submission if CAPTCHA is not verified if (!captchaVerified) {
+event.preventDefault(); // Prevent form submission showNotification("⚠️ Please
+verify the CAPTCHA before logging in!"); return false; } // If CAPTCHA is
+verified, allow login return true; } // Function to show the notification bar
+function showNotification(message) { const notificationBar =
+document.getElementById("notification-bar"); notificationBar.textContent =
+message; notificationBar.style.display = "block"; // Hide the notification after
+3 seconds setTimeout(() => { notificationBar.style.display = "none"; }, 3000); }
+// Function to show the CAPTCHA modal function showCaptchaModal() {
+document.getElementById("login-button").disabled = true; // Disable the login
+button const captchaCheckbox = document.getElementById("captcha-checkbox");
+captchaCheckbox.checked = false; const num1 = Math.floor(Math.random() * 10) +
+1; const num2 = Math.floor(Math.random() * 10) + 1; correctAnswer = num1 + num2;
+document.getElementById("math-problem").innerText = `What is ${num1} +
+${num2}?`; document.getElementById("captcha-modal").style.display = "block"; }
+// Function to close the CAPTCHA modal function closeCaptchaModal() {
+document.getElementById("captcha-modal").style.display = "none"; } // Function
+to verify the CAPTCHA answer function verifyCaptcha() { const userAnswer =
+document.getElementById("captcha-answer").value; if (parseInt(userAnswer) ===
+correctAnswer) { captchaVerified = true; showNotification("CAPTCHA verified
+successfully! ✅"); document.getElementById("login-button").disabled = false; //
+Enable login button closeCaptchaModal(); } else { showNotification("Incorrect
+CAPTCHA. Try again! ❌"); } } // Function to reset CAPTCHA if modal is closed
+without answering window.onclick = function (event) { const modal =
+document.getElementById("captcha-modal"); if (event.target === modal) {
+document.getElementById("captcha-checkbox").checked = false; // Uncheck CAPTCHA
+checkbox captchaVerified = false; // Reset CAPTCHA verification status
+closeCaptchaModal(); // Close modal } };

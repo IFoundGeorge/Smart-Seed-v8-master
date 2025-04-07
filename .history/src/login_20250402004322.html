@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form with Custom CAPTCHA</title>
+    <link rel="stylesheet" href="../../css/login.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.7.0/sha1.min.js"></script>
+    <style>
+      .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      #login-password {
+        width: 100%;
+        padding-right: 40px; /* Add space for the eye icon */
+      }
+
+      #toggle-password {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #888;
+      }
+
+      .contact-us {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .contact-us a {
+        color: #4caf50; /* Green text */
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .contact-us a:hover {
+        text-decoration: underline; /* Underline on hover */
+        color: #45a049; /* Darker green on hover */
+      }
+
+      /* Modal styling */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.4
+        ); /* Black background with opacity */
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .modal-content h2 {
+        margin-top: 0;
+      }
+
+      .modal-content a {
+        color: #4caf50;
+        text-decoration: none;
+      }
+
+      .modal-content a:hover {
+        text-decoration: underline;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <h1 class="title">Smart Seed</h1>
+        <form class="login-form" onsubmit="loginUser(event)">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <div class="password-container">
+            <input
+              type="password"
+              id="login-password"
+              placeholder="Password"
+              required
+            />
+            <span id="toggle-password" onclick="togglePasswordVisibility()"
+              >👁️</span
+            >
+          </div>
+
+          <!-- CAPTCHA Section -->
+          <div class="captcha-section">
+            <input
+              type="checkbox"
+              id="captcha-checkbox"
+              onclick="showCaptchaModal()"
+            />
+            <label for="captcha-checkbox">I'm not a robot</label>
+          </div>
+
+          <button type="submit" id="login-button" disabled>Login</button>
+        </form>
+
+        <!-- Clickable Guest Login -->
+        <p class="guest-text">
+          Or <a href="#" onclick="loginAsGuest()">continue as Guest</a>
+        </p>
+
+        <!-- Contact Us Link -->
+        <div class="contact-us">
+          <a href="#" onclick="contactUs()">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPTCHA Modal -->
+    <div id="captcha-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeCaptchaModal()">&times;</span>
+        <p id="math-problem"></p>
+        <input type="text" id="captcha-answer" placeholder="Your answer" />
+        <button onclick="verifyCaptcha()">Submit</button>
+      </div>
+    </div>
+
+    <!-- Contact Us Modal -->
+    <div id="contact-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeContactModal()">&times;</span>
+        <h2>Contact Us</h2>
+        <p><strong>Name:</strong> Cyrus M. Cavero</p>
+        <p><strong>Phone:</strong> 09168802764</p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:caverocyrus@gmail.com">caverocyrus@gmail.com</a>
+        </p>
+      </div>
+    </div>
+
+    <script src="../../js/login.js"></script>
+
+    <script>
+      function loginAsGuest() {
+        window.location.href = "guest/index.html";
+      }
+
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("login-password");
+        const togglePassword = document.getElementById("toggle-password");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          togglePassword.textContent = "🙈"; // Change icon to "hide" mode
+        } else {
+          passwordInput.type = "password";
+          togglePassword.textContent = "👁️"; // Change icon to "show" mode
+        }
+      }
+
+      function contactUs() {
+        const modal = document.getElementById("contact-modal");
+        modal.style.display = "block"; // Show the modal
+      }
+
+      function closeContactModal() {
+        const modal = document.getElementById("contact-modal");
+        modal.style.display = "none"; // Hide the modal
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("contact-modal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form with Custom CAPTCHA</title>
+    <link rel="stylesheet" href="../../css/login.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.7.0/sha1.min.js"></script>
+    <style>
+      .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      #login-password {
+        width: 100%;
+        padding-right: 40px; /* Space for the eye icon */
+      }
+      #toggle-password {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #888;
+      }
+      .captcha-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      #error-message {
+        color: red;
+        text-align: center;
+      }
+      #notification-bar {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <h1 class="title">Smart Seed</h1>
+        <form class="login-form" onsubmit="loginUser(event)">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <div class="password-container">
+            <input
+              type="password"
+              id="login-password"
+              placeholder="Password"
+              required
+            />
+            <span id="toggle-password" onclick="togglePasswordVisibility()"
+              >👁️</span
+            >
+          </div>
+
+          <!-- CAPTCHA Section -->
+          <div class="captcha-section">
+            <input type="checkbox" id="captcha-checkbox" disabled />
+            <label for="captcha-checkbox">I'm not a robot</label>
+            <button type="button" onclick="showCaptchaModal()">Verify</button>
+          </div>
+
+          <p id="error-message"></p>
+          <div id="notification-bar"></div>
+
+          <button type="submit" id="login-button" disabled>Login</button>
+        </form>
+
+        <!-- Clickable Guest Login -->
+        <p class="guest-text">
+          Or <a href="#" onclick="loginAsGuest()">continue as Guest</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- CAPTCHA Modal -->
+    <div id="captcha-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeCaptchaModal()">&times;</span>
+        <p id="math-problem"></p>
+        <input type="text" id="captcha-answer" placeholder="Your answer" />
+        <button onclick="verifyCaptcha()">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      let captchaVerified = false;
+
+      function showCaptchaModal() {
+        document.getElementById("captcha-modal").style.display = "block";
+        generateCaptcha();
+      }
+
+      function closeCaptchaModal() {
+        document.getElementById("captcha-modal").style.display = "none";
+      }
+
+      function generateCaptcha() {
+        const num1 = Math.floor(Math.random() * 10);
+        const num2 = Math.floor(Math.random() * 10);
+        document.getElementById(
+          "math-problem"
+        ).textContent = `What is ${num1} + ${num2}?`;
+        document
+          .getElementById("captcha-answer")
+          .setAttribute("data-answer", num1 + num2);
+      }
+
+      function verifyCaptcha() {
+        const userAnswer = document.getElementById("captcha-answer").value;
+        const correctAnswer = document
+          .getElementById("captcha-answer")
+          .getAttribute("data-answer");
+
+        if (userAnswer == correctAnswer) {
+          captchaVerified = true;
+          document.getElementById("captcha-checkbox").checked = true;
+          document.getElementById("captcha-checkbox").disabled = false;
+          document.getElementById("login-button").disabled = false; // Enable login
+          closeCaptchaModal();
+        } else {
+          alert("Incorrect answer. Please try again.");
+        }
+      }
+
+      function loginUser(event) {
+        event.preventDefault();
+
+        if (!captchaVerified) {
+          showNotification("Please verify the CAPTCHA first.");
+          return;
+        }
+
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        if (email === "test@example.com" && password === "password123") {
+          showNotification("Login successful!", "green");
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1000);
+        } else {
+          showNotification("Incorrect email or password.");
+        }
+      }
+
+      function showNotification(message, color = "red") {
+        const notificationBar = document.getElementById("notification-bar");
+        notificationBar.textContent = message;
+        notificationBar.style.backgroundColor = color;
+        notificationBar.style.display = "block";
+
+        setTimeout(() => {
+          notificationBar.style.display = "none";
+        }, 3000);
+      }
+
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("login-password");
+        const togglePassword = document.getElementById("toggle-password");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          togglePassword.textContent = "🙈";
+        } else {
+          passwordInput.type = "password";
+          togglePassword.textContent = "👁️";
+        }
+      }
+
+      function loginAsGuest() {
+        window.location.href = "guest/index.html";
+      }
+    </script>
+  </body>
+</html>
